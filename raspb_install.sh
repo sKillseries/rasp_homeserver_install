@@ -49,7 +49,7 @@ install_python_packages() {
 # Fonction pour install Pi-hole
 install_pihole() {
     echo -e "${BLUE} Installation et configuration de pi-hole en cours... ${NC}"
-    curl https://raw.githubusercontent.com/sKillseries/pi-project/main/docker-compose.yml  -o docker-compose.yml || print_error_and_exit "Echec du téléchargement du dockerfile pihole"
+    curl https://raw.githubusercontent.com/sKillseries/pi-hole-dockercompose/main/docker-compose.yml  -o docker-compose.yml || print_error_and_exit "Echec du téléchargement du dockerfile pihole"
     sed -i "s/WEBPASSWORD: 'YourPassword'/WEBPASSWORD: '$password'/" ./docker-compose.yml
     docker compose up  -d || print_error_and_exit "Echec du démarrage du conteneur"
     echo -e "${GREEN} Installation et configuration terminée."
