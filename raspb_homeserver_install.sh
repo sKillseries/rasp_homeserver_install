@@ -38,12 +38,11 @@ install_docker() {
 }
 
 # Fonction pour installer pip et les modules Python
-install_python_packages() {
-    echo -e "${BLUE} Installation de pip, exegol et automatexpertise en cours... ${NC}"
-    sudo apt install -y python3-pip || print_error_and_exit "Échec de l'installation de pip"
-    python3 -m pip install --upgrade pip || print_error_and_exit "Échec de la mise à jour de pip"
-    python3 -m pip install --user automatexpertise || print_error_and_exit "Échec de l'installation des modules Python"
-    echo -e "${GREEN} Installation des modules Python terminée."
+install_portainer() {
+    echo -e "${BLUE} Installation de portainer en cours... ${NC}"
+    docker pull portainer/portainer-ce:latest || print_error_and_exit "Echec du téléchargement de l'image docker portainer!"
+    docker run -d -p 9000:9000 -p 9443:9443 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest || print_error_and_exit "Echec du démarrage du conteneur"
+    echo -e "${GREEN} Installation de portainer terminée."
 }
 
 # Fonction pour install Pi-hole
@@ -58,7 +57,7 @@ install_pihole() {
 # Menu d'options
 echo "Choisissez une option :"
 echo "1. Installer docker"
-echo "2. Installer automatexpertise"
+echo "2. Installer portainer"
 echo "3. Installer pi-hole"
 echo "4. Quitter"
 
