@@ -37,7 +37,7 @@ install_docker() {
     echo -e "${GREEN} Installation de Docker terminée."
 }
 
-# Fonction pour installer pip et les modules Python
+# Fonction pour installer Portainer
 install_portainer() {
     echo -e "${BLUE} Installation de portainer en cours... ${NC}"
     docker pull portainer/portainer-ce:latest || print_error_and_exit "Echec du téléchargement de l'image docker portainer!"
@@ -67,7 +67,8 @@ case $choice in
     1)
         update
         install_curl
-        install_docker ;;
+        install_docker
+        echo -e "${YELLOW} Veuillez redémarrer votre système d'exploitation.";;
     2)
         install_portainer;;
     3)
@@ -78,7 +79,5 @@ case $choice in
     *)
         print_error_and_exit "Option invalide." ;;
 esac
-
-echo -e "${YELLOW} Veuillez redémarrer votre système d'exploitation. Sauf si étape installation pi-hole"
 
 exit 0
