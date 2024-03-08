@@ -69,7 +69,7 @@ case $choice in
         install_curl
         install_docker ;;
     2)
-        install_python_packages ;;
+        install_portainer;;
     3)
         read -p "Mot de passe désiré pour Pi-Hole: " password
         install_pihole ;;
